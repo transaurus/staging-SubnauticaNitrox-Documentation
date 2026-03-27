@@ -1,0 +1,10 @@
+{
+  "sourceUrl": "https://github.com/SubnauticaNitrox/Documentation",
+  "branch": "main",
+  "docusaurusRoot": ".",
+  "configFile": "docusaurus.config.js",
+  "translateCommand": "pnpm write-translations",
+  "buildCommand": "pnpm build",
+  "buildOutput": "build",
+  "packageManager": "pnpm"
+}
