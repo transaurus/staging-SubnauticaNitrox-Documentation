@@ -1,0 +1,44 @@
+---
+sidebar_position: 3
+title: Project Architecture
+---
+
+![Nitrox-Architecture](https://user-images.githubusercontent.com/23176718/164521320-c808ce81-3c94-4694-8dfa-395438669677.png)
+
+## Application projects
+
+### @projects.subnautica_server.name@
+
+Server application that is started by the @projects.launcher.name@ project. It has serialization logic for Subnautica game entities which makes it easier to communicate with Nitrox clients. A future plan is to abstract away serialization to custom Nitrox objects instead of Subnautica game objects.
+
+### @projects.launcher.name@
+
+[Avalonia](https://docs.avaloniaui.net/docs/welcome) application for starting the server and/or Subnautica. The launcher will inject the Nitrox client code by patching the Assembly-CSharp.dll of Subnautica, just before starting Subnautica.
+
+---
+
+## Nitrox library projects
+
+### @projects.model.name@
+
+Contains code common to the client and server without referencing Subnautica code directly. For example: Packet classes that are serialized between client and server.
+
+### @projects.subnautica_model.name@
+
+Contains code common to the client and server (like NitroxModel) with serialization logic for Subnautica game entities which makes it easier to communicate with Nitrox clients. A future plan is to abstract away serialization to custom Nitrox objects instead of Subnautica game objects.
+
+### NitroxPatcher
+
+Library that [is injected](https://github.com/SubnauticaNitrox/Nitrox/blob/master/Nitrox.Launcher/Models/Utils/NitroxEntryPatch.cs#L87-L111) into Subnautica. Handles modifying internal data structures and bootstrapping the client. It depends on the [HarmonyX](https://github.com/BepInEx/HarmonyX/wiki/Difference-between-Harmony-and-HarmonyX) library.
+
+### @projects.client.name@
+
+Injected as a reference to Subnautica via the NitroxPatcher project. Contains monobehaviours, UDP client, and packet handlers.
+
+### NitroxUnity
+
+Asset library for UI/Game components introduced by Nitrox.
+
+### Nitrox.Test
+
+Core unit testing project for all the other projects.
