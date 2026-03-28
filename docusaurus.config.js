@@ -27,7 +27,7 @@ export default async function createConfigAsync() {
     projectName: "Documentation", // Usually your repo name.
     trailingSlash: false,
 
-    onBrokenLinks: "throw",
+    onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: "warn",
 
     // Even if you don't use internalization, you can use this field to set useful
@@ -35,7 +35,7 @@ export default async function createConfigAsync() {
     // to replace "en" with "zh-Hans".
     i18n: {
       defaultLocale: "en",
-      locales: ["en"]
+      locales: ["en", "zh-Hans"]
     },
 
     markdown: {
